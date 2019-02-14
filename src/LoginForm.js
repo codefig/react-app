@@ -7,7 +7,7 @@ import {emailChanged} from './actions'
 class LoginForm extends React.Component{
 
     onEmailChange(text){
-        console.log(text);
+       console.log(text);
     }
 
     render(){
@@ -17,7 +17,8 @@ class LoginForm extends React.Component{
                 <CardSection>
                     <Input label="email"
                     placeholder="mallam@gmail.com"
-                    onChangeText={this.onEmailChange.bind(this)}/>
+                    onChangeText={this.onEmailChange.bind(this)}
+                    value={this.props.email}/>
                 </CardSection>
 
                 <CardSection>
@@ -41,4 +42,10 @@ const style = {
     }
 }
 
-export default connect(null, {emailChanged})(LoginForm);
+const  mapStateToProps = (state) => {
+    return {
+        email : state.auth.email,
+    }
+}
+
+export default connect(mapStateToProps, {emailChanged})(LoginForm);

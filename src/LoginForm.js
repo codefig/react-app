@@ -2,12 +2,18 @@ import React, { Component } from 'react'
 import {Text, View} from 'react-native'
 import {Card, CardSection, Input, Button} from './common'
 import {connect} from 'react-redux';
-import {emailChanged} from './actions'
+import {emailChanged, passwordChanged} from './actions'
 
 class LoginForm extends React.Component{
 
     onEmailChange(text){
        console.log(text);
+       this.props.emailChanged(text);
+    }
+
+    onPasswordChanged(text){
+        console.log("password : ", text);
+        this.props.passwordChanged(text);
     }
 
     render(){
@@ -23,7 +29,8 @@ class LoginForm extends React.Component{
 
                 <CardSection>
                     <Input label="password"
-                    placeholder="ifconfg" />
+                    placeholder="ifconfg"
+                    onChangeText={this.onPasswordChanged.bind(this)}/>
                 </CardSection>
 
                 <CardSection>
@@ -45,7 +52,8 @@ const style = {
 const  mapStateToProps = (state) => {
     return {
         email : state.auth.email,
+        password : state.auth.password
     }
 }
 
-export default connect(mapStateToProps, {emailChanged})(LoginForm);
+export default connect(mapStateToProps, {emailChanged, passwordChanged})(LoginForm);

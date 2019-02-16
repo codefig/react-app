@@ -1,4 +1,4 @@
-import {EMAIL_CHANGED, PASS_CHANGED, LOGIN_USER_SUCCESS} from './types';
+import {EMAIL_CHANGED, PASS_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL} from './types';
 import firebase from 'firebase';
 
 

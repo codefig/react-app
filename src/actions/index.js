@@ -22,7 +22,18 @@ export const loginUser = ({email, password}) => {
         .then(userObj => {
             console.log("Correct: ",userObj );
             dispatch({type: LOGIN_USER_SUCCESS, payload : userObj});
+        }).catch(() => {
+            console.log("Login Incorrect")
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((userObj) => {loginUserSuccess(dispatch, userObj)}
         })
     }
-   
+}
+
+const loginUserFail = (dispatch){
+    dispatch({type : LOGIN_USER_FAIL})
+}
+
+const loginUserSuccess = (dispatch, userObj){
+    dispatch({type : LOGIN_USER_SUCCESS, payload : userObj})
 }

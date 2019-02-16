@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import {Text, View} from 'react-native'
 import {Card, CardSection, Input, Button} from './common'
 import {connect} from 'react-redux';
-import {emailChanged, passwordChanged} from './actions'
+import {emailChanged, passwordChanged, loginUser} from './actions'
+import firebase from 'firebase'
 
 class LoginForm extends React.Component{
 
@@ -14,6 +15,22 @@ class LoginForm extends React.Component{
     onPasswordChanged(text){
         console.log("password : ", text);
         this.props.passwordChanged(text);
+    }
+    onButtonPress(){
+        const {email, password} = this.props; 
+        this.props.loginUser({email, password})
+    }
+
+    componentWillMount(){
+        var config = {
+            apiKey: "AIzaSyAG4dKyOXdmtGs0kjjjNlxh9bFTLDB3Tq0",
+            authDomain: "manager-669b5.firebaseapp.com",
+            databaseURL: "https://manager-669b5.firebaseio.com",
+            projectId: "manager-669b5",
+            storageBucket: "manager-669b5.appspot.com",
+            messagingSenderId: "465252304874"
+          };
+          firebase.initializeApp(config);
     }
 
     render(){
@@ -34,7 +51,7 @@ class LoginForm extends React.Component{
                 </CardSection>
 
                 <CardSection>
-                    <Button>Login</Button>
+                    <Button onPress={this.onButtonPress.bind(this)}>Login</Button>
                 </CardSection>
             </Card>
         )
@@ -56,4 +73,5 @@ const  mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {emailChanged, passwordChanged})(LoginForm);
+export default connect(mapStateToProps, {
+    emailChanged, passwordChanged, loginUser})(LoginForm);

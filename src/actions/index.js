@@ -17,8 +17,12 @@ export const passwordChanged = (text) => {
 }
 
 export const loginUser = ({email, password}) => {
-    firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((userObj) => {
-        console.log("Correct: ",userObj );
-    })
+    return (dispatch) => {
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(userObj => {
+            console.log("Correct: ",userObj );
+            dispatch({type: 'LOGIN_USER_SUCCESS', payload : userObj});
+        })
+    }
+   
 }

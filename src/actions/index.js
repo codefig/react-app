@@ -1,4 +1,4 @@
-import {EMAIL_CHANGED, PASS_CHANGED} from './types';
+import {EMAIL_CHANGED, PASS_CHANGED, LOGIN_USER_SUCCESS} from './types';
 import firebase from 'firebase';
 
 
@@ -21,7 +21,7 @@ export const loginUser = ({email, password}) => {
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then(userObj => {
             console.log("Correct: ",userObj );
-            dispatch({type: 'LOGIN_USER_SUCCESS', payload : userObj});
+            dispatch({type: LOGIN_USER_SUCCESS, payload : userObj});
         })
     }
    

@@ -1,5 +1,5 @@
 const initial_state = {email : '',password: ''}
-import {EMAIL_CHANGED, PASS_CHANGED} from '../actions/types';
+import {EMAIL_CHANGED, PASS_CHANGED, LOGIN_USER_SUCCESS} from '../actions/types';
 
 export default (state = initial_state, action) => {
     console.log(action)

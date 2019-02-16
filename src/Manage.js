@@ -3,13 +3,15 @@ import { Text, View } from "react-native";
 import LoginForm from "./LoginForm";
 import { Header, Card } from "./common";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import {reducers} from './reducers'
+import ReduxThunk from 'redux-thunk';
 
 class Manage extends React.Component {
   render() {
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
     return (
-      <Provider store={createStore(reducers)}>
+      <Provider store={store}>
         <Card>
           <Header headerText="Authentication" />
           <LoginForm />

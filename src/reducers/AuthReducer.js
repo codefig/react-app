@@ -1,4 +1,4 @@
-const initial_state = {email : ''}
+const initial_state = {email : '',password: ''}
 import {EMAIL_CHANGED, PASS_CHANGED} from '../actions/types';
 
 export default (state = initial_state, action) => {

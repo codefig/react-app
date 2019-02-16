@@ -24,6 +24,7 @@ export const loginUser = ({email, password}) => {
             console.log("Login Incorrect")
             firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((userObj) => {loginUserSuccess(dispatch, userObj)})
+            .catch(() => {loginUserFail(dispatch)})
         })
     }
 }

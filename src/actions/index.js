@@ -1,4 +1,10 @@
-import {EMAIL_CHANGED, PASS_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL} from './types';
+import {
+    EMAIL_CHANGED, 
+    PASS_CHANGED, 
+    LOGIN_USER_SUCCESS, 
+    LOGIN_USER_FAIL, 
+    LOGIN_USER
+} from './types';
 import firebase from 'firebase';
 
 
@@ -17,7 +23,11 @@ export const passwordChanged = (text) => {
 }
 
 export const loginUser = ({email, password}) => {
+    //dispatch the spinner Login_user action
+
+    
     return (dispatch) => {
+        dispatch({type : LOGIN_USER})
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then(userObj => {loginUserSuccess(dispatch, userObj)})
         .catch(() => {
@@ -27,7 +37,7 @@ export const loginUser = ({email, password}) => {
             .catch(() => {loginUserFail(dispatch)})
         })
     }
-}
+} 
 
 const loginUserFail = (dispatch)=>{
     dispatch({type : LOGIN_USER_FAIL})

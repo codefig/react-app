@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Text, View} from 'react-native'
-import {Card, CardSection, Input, Button} from './common'
+import {Card, CardSection, Input, Button, Spinner} from './common'
 import {connect} from 'react-redux';
 import {emailChanged, passwordChanged, loginUser} from './actions'
 import firebase from 'firebase'
@@ -33,8 +33,17 @@ class LoginForm extends React.Component{
           firebase.initializeApp(config);
     }
 
+    renderButton(){
+        if(this.props.loading){
+            return <Spinner size="large"/>;
+        }
+        else{
+            return <Button onPress={this.onButtonPress.bind(this)}>Login</Button>
+        }
+    }
+
     render(){
-        console.log(this.props);
+        console.log("props: " , this.props);
         return(
             <Card style={style.bodyStyle}>
                 <CardSection>
@@ -50,8 +59,12 @@ class LoginForm extends React.Component{
                     onChangeText={this.onPasswordChanged.bind(this)}/>
                 </CardSection>
 
+                <Text style={style.errorStyle }>
+                    {this.props.error}
+                </Text>
+
                 <CardSection>
-                    <Button onPress={this.onButtonPress.bind(this)}>Login</Button>
+                    {this.renderButton()}
                 </CardSection>
             </Card>
         )
@@ -63,13 +76,20 @@ const style = {
         flex : 1, 
         backgroundColor:'#ffccff',
         paddingTop: 20
+    }, 
+    errorStyle : {
+        fontSize:  20,
+        alignSelf: 'center',
+        color:'red'
     }
 }
 
 const  mapStateToProps = (state) => {
     return {
         email : state.auth.email,
-        password : state.auth.password
+        password : state.auth.password, 
+        error : state.auth.error, 
+        loading: state.auth.loading
     }
 }
 

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Text, View, } from 'react-native'; 
 import {Card, CardSection, Button, Input} from './common';
+import {connect} from 'react-redux';
+import {empoloyeeUpdate} from './actions';
 
 class EmployeeCreate extends React.Component{
 
@@ -21,7 +23,7 @@ class EmployeeCreate extends React.Component{
                </CardSection>
 
                <CardSection>
-                   
+
                </CardSection>
 
                <CardSection>
@@ -34,4 +36,4 @@ class EmployeeCreate extends React.Component{
     }
 }
 
-export default EmployeeCreate
+export default connect(null, {empoloyeeUpdate})(EmployeeCreate);

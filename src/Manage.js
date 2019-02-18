@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import {reducers} from './reducers'
 import ReduxThunk from 'redux-thunk';
+import RouterComponent from './Router';
 
 class Manage extends React.Component {
   render() {
@@ -13,8 +14,9 @@ class Manage extends React.Component {
     return (
       <Provider store={store}>
         <Card>
-          <Header headerText="Authentication" />
-          <LoginForm />
+          {/* <Header headerText="Authentication" /> */}
+          {/* <LoginForm /> */}
+          <RouterComponent/>
         </Card>
       </Provider>
     );

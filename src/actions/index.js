@@ -6,6 +6,7 @@ import {
     LOGIN_USER
 } from './types';
 import firebase from 'firebase';
+import {Actions} from 'react-native-router-flux';
 
 
 export const emailChanged = (text) => {
@@ -30,11 +31,14 @@ export const loginUser = ({email, password}) => {
         dispatch({type : LOGIN_USER})
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then(userObj => {loginUserSuccess(dispatch, userObj)})
-        .catch(() => {
-            console.log("Login Incorrect")
+        .catch((err) => {
+            console.log("Login Incorrect", err)
             firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((userObj) => {loginUserSuccess(dispatch, userObj)})
-            .catch(() => {loginUserFail(dispatch)})
+            .catch((err) => {
+                console.log("Another fail: ", err)
+                loginUserFail(dispatch)
+            })
         })
     }
 } 
@@ -44,5 +48,8 @@ const loginUserFail = (dispatch)=>{
 }
 
 const loginUserSuccess = (dispatch, userObj)=>{
+    console.log("Login successfull", userObj)
     dispatch({type : LOGIN_USER_SUCCESS, payload : userObj})
+
+    Actions.employeeList();
 }

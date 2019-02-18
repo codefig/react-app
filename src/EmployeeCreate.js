@@ -28,7 +28,7 @@ class EmployeeCreate extends React.Component{
                    />
                </CardSection>
 
-               <CardSection style={{ flexDirection: 'column' }}>
+               <CardSection style={{  }}>
                 <Text style={{ paddingLeft:20, fontSize:18 }}>Select Shift</Text>
                 <Picker
                 style={{ flex: 1 }}

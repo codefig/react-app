@@ -8,19 +8,26 @@ import {Actions} from 'react-native-router-flux';
 const RouterComponent = () => {
   return (
     <Router sceneStyle={{ paddingTop: 65 }}>
-      <Scene>
+      <Scene
+      back={false}>
 
       <Scene key="auth">
-      <Scene key="login" component={LoginForm} title="Login" initial />
+      <Scene key="login" component={LoginForm} title="Login" initial/>
       </Scene>
 
 
-        <Scene key="main">
-          <Scene
+        <Scene 
+        key="main"
+        back={false}
+        >
+        
+        <Scene
             key="employeeList"
+            back={false}
             component={EmployeeList}
             title="Employees"
             rightTitle="Add"
+            backTitle=""
             onRight={() => {Actions.employeeCreate()}}
           />
 

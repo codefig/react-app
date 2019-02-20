@@ -33,11 +33,15 @@ class EmployeeList extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-    const employees = _.map(state.employees, (val, uid) => {
-        return {...val, uid};
-    });
+    // const employees = _.map(state.employees, (val, uid) => {
+    //     return {...val, uid};
+    // });
+
+    const employees = {
+       
+    }
 
     return {employees};
 }
-
-export default connect(mapStateToProps, {employeesFetch})(EmployeeList);
+export default connect(mapStateToProps,{employeesFetch})(EmployeeList);
+// export default connect(mapStateToProps, {employeesFetch})(EmployeeList);
